@@ -52,7 +52,7 @@ def train(cfg, env, agent):
                 print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{agent.epsilon:.2f}")
             if cfg.mid_save:
                 if mean_eval_reward == 200:
-                    torch.save(agent, f"./Data/CartPole-v0-StateAttention-Noise/{i_ep+1}-{cfg.train_eps}.pt")
+                    torch.save(agent, f"./Data/CartPole-v0-StateAttention-None/{i_ep+1}-{cfg.train_eps}.pt")
         steps.append(ep_step)
         rewards.append(ep_reward)
     print("完成训练！")
