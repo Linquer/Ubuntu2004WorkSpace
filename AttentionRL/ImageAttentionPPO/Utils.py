@@ -1,6 +1,7 @@
 import copy
 import torch
 import numpy as np
+import cv2 as cv2
 import torchvision.transforms as transforms
 
 output_agent = None
@@ -9,8 +10,10 @@ trans = transforms.Compose([
     transforms.ToTensor()
 ])
 def get_image_state(state):
-    image = torch.from_numpy(state).type(torch.float32)
-    image = image.permute(2, 0, 1)
+    state = state[20:210] # 切割掉无用的部分
+    state = cv2.cvtColor(state, cv2.COLOR_RGB2GRAY)
+    state = cv2.resize(state, (84, 84))
+    image = torch.from_numpy(state).type(torch.float32).unsqueeze(0)
     return trans(image)
 def train(cfg, env, agent):
     ''' 训练
@@ -24,9 +27,26 @@ def train(cfg, env, agent):
         ep_reward = 0  # 记录一回合内的奖励
         ep_step = 0
         state = env.reset()  # 重置环境，返回初始状态
-        batch_count = 0
+        single_count = 0
+        temp_reward = 0
         for i in range(cfg.max_steps):
             ep_step += 1
+            # if cfg.skip_frame:
+            #     if i % cfg.skip_frame != 0:
+            #         next_state, reward, done, _ = env.step(action)
+            #         temp_reward += reward
+            #     else:
+            #         state = get_image_state(state)
+            #         action = agent.sample_action(state)
+            #         next_state, reward, done, _ = env.step(action)
+            #         temp_reward += reward
+            #         agent.memory.push((state, action, agent.log_probs, temp_reward, done))
+            #         temp_reward = 0
+            # else:
+            #     state = get_image_state(state)
+            #     action = agent.sample_action(state)  # 选择动作
+            #     next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
+            #     agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
             state = get_image_state(state)
             action = agent.sample_action(state)  # 选择动作
             next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
@@ -35,6 +55,7 @@ def train(cfg, env, agent):
             # agent.update()  # 更新智能体
             ep_reward += reward  # 累加奖励
             count_ += 1
+            single_count += 1
             if done:
                 break
         agent.update()  # 更新智能体
@@ -58,9 +79,9 @@ def train(cfg, env, agent):
             if mean_eval_reward >= best_ep_reward:
                 best_ep_reward = mean_eval_reward
                 output_agent = copy.deepcopy(agent)
-                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！ {agent.epsilon:.2f}")
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！，动作次数：{single_count} {agent.epsilon:.2f}")
             else:
-                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{agent.epsilon:.2f}")
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，动作次数：{single_count}{agent.epsilon:.2f}")
             if cfg.mid_save:
                 if mean_eval_reward == 200:
                     torch.save(agent, f"./Data/CartPole-v0-StateAttention-None/{i_ep+1}-{cfg.train_eps}.pt")

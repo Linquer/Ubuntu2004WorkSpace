@@ -12,8 +12,8 @@ class Config:
         self.train_eps = 21 # 训练的回合数
         self.test_eps = 10 # 测试的回合数
         self.max_steps = 10000 # 每个回合的最大步数
-        self.eval_eps = 3 # 评估的回合数
-        self.eval_per_episode = 1 # 评估的频率
+        self.eval_eps = 2 # 评估的回合数
+        self.eval_per_episode = 3 # 评估的频率
         self.epsilon_start = 0.9 # epsilon初始值
         self.epsilon_end = 0.05 # epsilon最终值
         self.epsilon_decay = 500 # epsilon衰减率
@@ -21,7 +21,7 @@ class Config:
         self.train_batch_size = 3 # 每次训练前收集多少轮数的数据
         self.gamma = 0.99 # 折扣因子
         self.k_epochs = 2 # 更新策略网络的次数
-        self.actor_lr = 0.002 # actor网络的学习率
+        self.actor_lr = 0.02 # actor网络的学习率
         self.critic_lr = 0.0003 # critic网络的学习率
         self.eps_clip = 0.2 # epsilon-clip
         self.entropy_coef = 0.1 # entropy的系数
@@ -33,6 +33,8 @@ class Config:
         self.atten_std = 1
         self.atten_noise = False
         self.mid_save = False
+        self.skip_frame_num = 4
+        self.skip_frame = False
 
 def smooth(data, weight=0.75):  
     '''用于平滑曲线，类似于Tensorboard中的smooth曲线
