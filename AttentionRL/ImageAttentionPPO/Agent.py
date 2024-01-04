@@ -11,8 +11,8 @@ class Agent:
         
         self.gamma = cfg.gamma
         self.device = torch.device(cfg.device) 
-        self.actor = ActorSoftmax(cfg.n_states,cfg.n_actions,cfg.atten_noise).to(self.device)
-        self.critic = Critic(cfg.n_states,1,hidden_dim=cfg.critic_hidden_dim).to(self.device)
+        self.actor = ActorSoftmax(cfg.n_states,cfg.n_actions,cfg.atten_noise,self.device).to(self.device)
+        self.critic = Critic().to(self.device)
         self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=cfg.actor_lr)
         self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), lr=cfg.critic_lr)
         self.memory = PGReplay()
@@ -57,7 +57,8 @@ class Agent:
         # print("update policy")
         old_states, old_actions, old_log_probs, old_rewards, old_dones = self.memory.sample()
         # convert to tensor
-        old_states = torch.tensor(np.array(old_states), device=self.device, dtype=torch.float32)
+        old_states = torch.stack(old_states).to(self.device)
+        # old_states = torch.tensor(np.array(old_states), device=self.device, dtype=torch.float32)
         old_actions = torch.tensor(np.array(old_actions), device=self.device, dtype=torch.float32)
         old_log_probs = torch.tensor(old_log_probs, device=self.device, dtype=torch.float32)
         # monte carlo estimate of state rewards

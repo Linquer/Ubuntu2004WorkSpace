@@ -1,8 +1,17 @@
 import copy
 import torch
 import numpy as np
+import torchvision.transforms as transforms
 
 output_agent = None
+trans = transforms.Compose([
+    transforms.ToPILImage(),
+    transforms.ToTensor()
+])
+def get_image_state(state):
+    image = torch.from_numpy(state).type(torch.float32)
+    image = image.permute(2, 0, 1)
+    return trans(image)
 def train(cfg, env, agent):
     ''' 训练
     '''
@@ -18,6 +27,7 @@ def train(cfg, env, agent):
         batch_count = 0
         for i in range(cfg.max_steps):
             ep_step += 1
+            state = get_image_state(state)
             action = agent.sample_action(state)  # 选择动作
             next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
             agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
@@ -35,6 +45,7 @@ def train(cfg, env, agent):
                 eval_ep_reward = 0
                 state = env.reset()
                 for _ in range(cfg.max_steps):
+                    state = get_image_state(state)
                     action = agent.predict_action(state)  # 选择动作
                     next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
                     state = next_state  # 更新下一个状态
@@ -71,6 +82,7 @@ def test(cfg, env, agent):
         state = env.reset()  # 重置环境，返回初始状态
         for _ in range(cfg.max_steps):
             ep_step+=1
+            state = get_image_state(state)
             action = agent.predict_action(state)  # 选择动作
             next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
             state = next_state  # 更新下一个状态
