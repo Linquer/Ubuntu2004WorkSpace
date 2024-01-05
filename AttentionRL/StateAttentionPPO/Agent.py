@@ -89,6 +89,7 @@ class Agent:
             actor_loss = -torch.min(surr1, surr2).mean() + self.entropy_coef * dist.entropy().mean()
             # compute critic loss
             critic_loss = (returns - values).pow(2).mean()
+            # critic_loss = (values - returns).pow(2).mean()
             # take gradient step
             self.actor_optimizer.zero_grad()
             self.critic_optimizer.zero_grad()

@@ -131,10 +131,10 @@ class Critic(nn.Module):
     
     def forward(self,x):
         x1 = self.residual_block1(x)
-        x1 = F.relu(x1)
+        x1 = F.leaky_relu(x1, 0.5)
         x2 = self.residual_block2(x1)
-        x2 = F.relu(x2) + x1
+        x2 = F.leaky_relu(x2, 0.5) + x1
         x3 = self.residual_block3(x2)
-        x3 = F.relu(x3)
+        x3 = F.leaky_relu(x3, 1.0)
         return x3
 
