@@ -10,7 +10,7 @@ trans = transforms.Compose([
     transforms.ToTensor()
 ])
 def get_image_state(state):
-    state = state[20:210] # 切割掉无用的部分
+    state = state[35:195, 10:150] # 切割掉无用的部分
     state = cv2.cvtColor(state, cv2.COLOR_RGB2GRAY)
     state = cv2.resize(state, (84, 84))
     image = torch.from_numpy(state).type(torch.float32).unsqueeze(0)
@@ -27,30 +27,38 @@ def train(cfg, env, agent):
         ep_reward = 0  # 记录一回合内的奖励
         ep_step = 0
         state = env.reset()  # 重置环境，返回初始状态
+        state = get_image_state(state)
+        action = agent.sample_action(state)
+        pre_state = state
+        pre_action = action
+        pre_log_probs = agent.log_probs
         single_count = 0
         temp_reward = 0
         for i in range(cfg.max_steps):
             ep_step += 1
-            # if cfg.skip_frame:
-            #     if i % cfg.skip_frame != 0:
-            #         next_state, reward, done, _ = env.step(action)
-            #         temp_reward += reward
-            #     else:
-            #         state = get_image_state(state)
-            #         action = agent.sample_action(state)
-            #         next_state, reward, done, _ = env.step(action)
-            #         temp_reward += reward
-            #         agent.memory.push((state, action, agent.log_probs, temp_reward, done))
-            #         temp_reward = 0
-            # else:
-            #     state = get_image_state(state)
-            #     action = agent.sample_action(state)  # 选择动作
-            #     next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
-            #     agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
-            state = get_image_state(state)
-            action = agent.sample_action(state)  # 选择动作
-            next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
-            agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
+            if cfg.skip_frame:
+                if (i+1) % cfg.skip_frame_num != 0:
+                    next_state, reward, done, _ = env.step(action)
+                    temp_reward += reward
+                else:
+                    state = get_image_state(state)
+                    action = agent.sample_action(state)
+                    next_state, reward, done, _ = env.step(action)
+                    agent.memory.push((pre_state, pre_action, pre_log_probs, temp_reward, done))
+                    temp_reward = 0
+                    temp_reward += reward
+                    pre_state = state
+                    pre_action = action
+                    pre_log_probs = agent.log_probs
+            else:
+                state = get_image_state(state)
+                action = agent.sample_action(state)  # 选择动作
+                next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
+                agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
+            # state = get_image_state(state)
+            # action = agent.sample_action(state)  # 选择动作
+            # next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
+            # agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
             state = next_state  # 更新下一个状态
             # agent.update()  # 更新智能体
             ep_reward += reward  # 累加奖励
@@ -81,7 +89,7 @@ def train(cfg, env, agent):
                 output_agent = copy.deepcopy(agent)
                 print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！，动作次数：{single_count} {agent.epsilon:.2f}")
             else:
-                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，动作次数：{single_count}{agent.epsilon:.2f}")
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，动作次数：{single_count} {agent.epsilon:.2f}")
             if cfg.mid_save:
                 if mean_eval_reward == 200:
                     torch.save(agent, f"./Data/CartPole-v0-StateAttention-None/{i_ep+1}-{cfg.train_eps}.pt")
