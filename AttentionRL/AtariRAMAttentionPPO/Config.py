@@ -3,7 +3,7 @@ import seaborn as sns
 
 class Config:
      def __init__(self) -> None:
-        self.env_name = "MountainCar-v0" # 环境名字
+        self.env_name = "Breakout-v4" # 环境名字
         self.new_step_api = False # 是否用gym的新api
         self.algo_name = "PPO" # 算法名字
         self.mode = "train" # train or test
