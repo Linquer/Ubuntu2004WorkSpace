@@ -31,7 +31,7 @@ class Config:
         self.input_dim = 256
         self.gama_a_s = 0.25
         self.atten_std = 1
-        self.atten_noise = False
+        self.atten_noise = True
         self.mid_save = False
 
 def smooth(data, weight=0.75):  

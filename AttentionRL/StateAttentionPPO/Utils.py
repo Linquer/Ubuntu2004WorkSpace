@@ -16,19 +16,19 @@ def train(cfg, env, agent):
         ep_step = 0
         state = env.reset()  # 重置环境，返回初始状态
         batch_count = cfg.train_batch_size
-        while batch_count > 0:
-            for i in range(cfg.max_steps):
-                ep_step += 1
-                action = agent.sample_action(state)  # 选择动作
-                next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
-                agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
-                state = next_state  # 更新下一个状态
-                # agent.update()  # 更新智能体
-                ep_reward += reward  # 累加奖励
-                count_ += 1
-                if done:
-                    batch_count -= 1
-                    break
+        # while batch_count > 0:
+        for i in range(cfg.max_steps):
+            ep_step += 1
+            action = agent.sample_action(state)  # 选择动作
+            next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
+            agent.memory.push((state, action, agent.log_probs, reward, done))  # 保存transition
+            state = next_state  # 更新下一个状态
+            # agent.update()  # 更新智能体
+            ep_reward += reward  # 累加奖励
+            count_ += 1
+            if done:
+                # batch_count -= 1
+                break
         agent.update()  # 更新智能体
         if (i_ep+1)%cfg.eval_per_episode == 0:
             agent.actor.eval()
