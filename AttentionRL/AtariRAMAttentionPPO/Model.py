@@ -39,7 +39,7 @@ class AttentionNetwork(nn.Module):
         return output, atten
 
 class StateNetwork(nn.Module):
-    def __init__(self, state_dim, state_cut_dim=32, state_Q_dim=64):
+    def __init__(self, state_dim, state_cut_dim=64, state_Q_dim=128):
         # input: (batch_size, state_dim)
         # output: (batch_size, block_size, state_cut_dim)
         super(StateNetwork, self).__init__()
@@ -88,10 +88,10 @@ class ActorSoftmax(nn.Module):
         self.n_states = input_dim_global
         self.n_actions = n_actions
         self.atten = None
-        self.input_dim = 64
-        self.hidden_dim0 = 64
-        self.hidden_dim1 = 32
-        self.hidden_dim2 = 16
+        self.input_dim = 128
+        self.hidden_dim0 = 96
+        self.hidden_dim1 = 64
+        self.hidden_dim2 = 32
         self.output_layer = nn.Sequential(
             nn.Linear(self.input_dim, self.hidden_dim0),
             nn.LeakyReLU(0.2),
@@ -103,7 +103,7 @@ class ActorSoftmax(nn.Module):
             nn.LeakyReLU(0.2)
         )
         self.state_net = StateNetwork(self.n_states)
-        self.atten_net = AttentionNetwork(32, 64, noise=noise)
+        self.atten_net = AttentionNetwork(64, 128, noise=noise)
     
     def forward(self, x):
         KV, Q = self.state_net(x)
