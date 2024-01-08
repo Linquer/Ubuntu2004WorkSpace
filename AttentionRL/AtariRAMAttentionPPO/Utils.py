@@ -10,6 +10,7 @@ def train(cfg, env, agent):
     count_ = 0
     rewards = []  # 记录所有回合的奖励
     steps = []
+    epoch_count = 0
     best_ep_reward = -1000 # 记录最大回合奖励
     for i_ep in range(cfg.train_eps):
         ep_reward = 0  # 记录一回合内的奖励
@@ -29,6 +30,7 @@ def train(cfg, env, agent):
             # agent.update()  # 更新智能体
             ep_reward += reward  # 累加奖励
             count_ += 1
+            epoch_count += 1
             if done:
                 # batch_count -= 1
                 break
@@ -55,11 +57,12 @@ def train(cfg, env, agent):
             if mean_eval_reward >= best_ep_reward:
                 best_ep_reward = mean_eval_reward
                 output_agent = copy.deepcopy(agent)
-                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！ {agent.epsilon:.2f}")
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！{epoch_count/cfg.eval_per_episode} {agent.epsilon:.2f}")
             else:
-                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{agent.epsilon:.2f}")
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{epoch_count/cfg.eval_per_episode} {agent.epsilon:.2f}")
+            epoch_count = 0
             if cfg.mid_save:
-                if mean_eval_reward >= -70:
+                if mean_eval_reward >= 1000:
                     torch.save(agent, f"./Data/LunarLander-v2-StateAttention-Noise/{i_ep+1}-{cfg.train_eps}.pt")
         steps.append(ep_step)
         rewards.append(ep_reward)
