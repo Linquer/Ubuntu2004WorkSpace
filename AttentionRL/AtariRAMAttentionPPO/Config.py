@@ -9,19 +9,19 @@ class Config:
         self.mode = "train" # train or test
         self.seed = 1234 # 随机种子
         self.device = "cuda" # device to use
-        self.train_eps = 600 # 训练的回合数
+        self.train_eps = 500 # 训练的回合数
         self.test_eps = 10 # 测试的回合数
         self.max_steps = 2000 # 每个回合的最大步数
         self.eval_eps = 1 # 评估的回合数
         self.eval_per_episode = 20 # 评估的频率
         self.epsilon_start = 0.9 # epsilon初始值
-        self.epsilon_end = 0.05 # epsilon最终值
+        self.epsilon_end = 0.075 # epsilon最终值
         self.epsilon_decay = 1000 # epsilon衰减率
 
         self.train_batch_size = 3 # 每次训练前收集多少轮数的数据
         self.gamma = 0.9 # 折扣因子
         self.k_epochs = 1 # 更新策略网络的次数
-        self.actor_lr = 0.00007 # actor网络的学习率
+        self.actor_lr = 0.000075 # actor网络的学习率
         self.critic_lr = 0.00003 # critic网络的学习率
         self.eps_clip = 0.2 # epsilon-clip
         self.entropy_coef = 0.05 # entropy的系数
@@ -31,8 +31,8 @@ class Config:
         self.input_dim = 256
         self.gama_a_s = 0.25
         self.atten_std = 1
-        self.atten_noise = False
-        self.mid_save = False
+        self.atten_noise = True
+        self.mid_save = True
 
 def smooth(data, weight=0.75):  
     '''用于平滑曲线，类似于Tensorboard中的smooth曲线

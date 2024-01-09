@@ -62,8 +62,8 @@ def train(cfg, env, agent):
                 print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{epoch_count/cfg.eval_per_episode} {agent.epsilon:.2f}")
             epoch_count = 0
             if cfg.mid_save:
-                if mean_eval_reward >= 1000:
-                    torch.save(agent, f"./Data/LunarLander-v2-StateAttention-Noise/{i_ep+1}-{cfg.train_eps}.pt")
+                if ep_reward >= 530:
+                    torch.save(agent, f"./Data/BeamRider-v0-RAM-Noise/{i_ep+1}-{cfg.train_eps}-{ep_reward}.pt")
         steps.append(ep_step)
         rewards.append(ep_reward)
     print("完成训练！")
