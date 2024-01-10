@@ -63,7 +63,7 @@ def train(cfg, env, agent):
             epoch_count = 0
             if cfg.mid_save:
                 if ep_reward >= 530:
-                    torch.save(agent, f"./Data/BeamRider-v0-RAM-Noise/{i_ep+1}-{cfg.train_eps}-{ep_reward}.pt")
+                    torch.save(agent, f"./Data/BeamRider-v0-RAM-None/{cfg.mid_save_version}-{i_ep+1}-{cfg.train_eps}-{ep_reward}.pt")
         steps.append(ep_step)
         rewards.append(ep_reward)
     print("完成训练！")
