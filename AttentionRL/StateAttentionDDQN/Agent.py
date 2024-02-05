@@ -21,8 +21,8 @@ class DoubleDQN(object):
         self.epsilon_decay = cfg.epsilon_decay
         self.batch_size = cfg.batch_size
         self.target_update = cfg.target_update
-        self.policy_net = MLP(cfg.n_states,cfg.n_actions,hidden_dim=cfg.hidden_dim).to(self.device)
-        self.target_net = MLP(cfg.n_states,cfg.n_actions,hidden_dim=cfg.hidden_dim).to(self.device)
+        self.policy_net = MLP(cfg.n_states,cfg.n_actions,cfg=cfg).to(self.device)
+        self.target_net = MLP(cfg.n_states,cfg.n_actions,cfg=cfg).to(self.device)
          # 复制参数到目标网络
         for target_param, param in zip(self.target_net.parameters(),self.policy_net.parameters()): 
             target_param.data.copy_(param.data)
@@ -54,6 +54,13 @@ class DoubleDQN(object):
         q_values = self.policy_net(state)
         action = q_values.max(1)[1].item() # choose action corresponding to the maximum q value
         return action
+    def predict_action_returnQ(self, state):
+        ''' 预测动作
+        '''
+        state = torch.tensor(state, device=self.device, dtype=torch.float32).unsqueeze(dim=0)
+        q_values = self.policy_net(state)
+        action = q_values.max(1)[1].item() # choose action corresponding to the maximum q value
+        return action, q_values
     def update(self):
         if len(self.memory) < self.batch_size: # 当经验回放中不满足一个批量时，不更新策略
             return

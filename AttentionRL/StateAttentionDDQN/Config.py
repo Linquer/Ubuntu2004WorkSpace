@@ -10,7 +10,7 @@ class Config:
         self.test_eps = 10  # 测试回合数
         self.max_steps = 200 # 每回合最大步数
         self.gamma = 0.99 # 折扣因子
-        self.lr = 0.0001 # 学习率
+        self.lr = 0.001 # 学习率
         self.epsilon_start = 0.95 # epsilon初始值
         self.epsilon_end = 0.01 # epsilon最终值
         self.epsilon_decay = 500 # epsilon衰减率
@@ -18,6 +18,8 @@ class Config:
         self.batch_size = 64 # ReplayBuffer中批次大小
         self.target_update = 4 # 目标网络更新频率
         self.hidden_dim = 256 # 神经网络隐藏层维度
+        self.atten_noise = False
+        self.mid_save = False
         if torch.cuda.is_available(): # 是否使用GPUs
             self.device = 'cuda'
         else:
