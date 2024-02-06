@@ -1,10 +1,23 @@
 import torch
+import copy
+from Env import env_agent_config
+from Agent import DoubleDQN
+
+def copy_By_mine(agent, cfg):
+    new_agent = DoubleDQN(cfg)
+    old_target_state = agent.target_net.state_dict()
+    old_policy_state = agent.policy_net.state_dict()
+    new_agent.target_net.load_state_dict(old_target_state)
+    new_agent.policy_net.load_state_dict(old_policy_state)
+    return new_agent
+
 def train(cfg, env, agent):
     ''' 训练
     '''
     print("开始训练！")
     rewards = []  # 记录所有回合的奖励
     steps = []
+    best_ep_reward = -1000 # 记录最大回合奖励
     for i_ep in range(cfg.train_eps):
         ep_reward = 0  # 记录一回合内的奖励
         ep_step = 0
@@ -21,13 +34,39 @@ def train(cfg, env, agent):
             ep_reward += reward  # 累加奖励
             if done:
                 break
+        if (i_ep+1)%cfg.eval_per_episode == 0:
+            agent.policy_net.eval()
+            agent.target_net.eval()
+            sum_eval_reward = 0
+            for _ in range(cfg.eval_eps):
+                eval_ep_reward = 0
+                state = env.reset()
+                for _ in range(cfg.max_steps):
+                    action = agent.predict_action(state)  # 选择动作
+                    next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
+                    state = next_state  # 更新下一个状态
+                    eval_ep_reward += reward  # 累加奖励
+                    if done:
+                        break
+                sum_eval_reward += eval_ep_reward
+            agent.policy_net.train()
+            agent.target_net.train()
+            mean_eval_reward = sum_eval_reward/cfg.eval_eps
+            if mean_eval_reward >= best_ep_reward:
+                best_ep_reward = mean_eval_reward
+                # output_agent = copy.deepcopy(agent)
+                output_agent = copy_By_mine(agent, cfg)
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，更新模型！ {agent.epsilon:.2f}")
+            else:
+                print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，评估奖励：{mean_eval_reward:.2f}，最佳评估奖励：{best_ep_reward:.2f}，{agent.epsilon:.2f}")
+            if cfg.mid_save:
+                if mean_eval_reward >= -70:
+                    torch.save(agent, f"./Data/LunarLander-v2-StateAttention-Noise/{i_ep+1}-{cfg.train_eps}.pt")
         steps.append(ep_step)
         rewards.append(ep_reward)
-        if (i_ep + 1) % 10 == 0:
-            print(f"回合：{i_ep+1}/{cfg.train_eps}，奖励：{ep_reward:.2f}，Epislon：{agent.epsilon:.3f}")
     print("完成训练！")
     env.close()
-    return {'rewards':rewards}
+    return output_agent, {'rewards':rewards}
 
 def test(cfg, env, agent):
     print("开始测试！")

@@ -6,9 +6,11 @@ class Config:
         self.algo_name = 'DoubleDQN' # 算法名称
         self.env_name = 'CartPole-v1' # 环境名称
         self.seed = 1234 # 随机种子
-        self.train_eps = 600 # 训练回合数
-        self.test_eps = 30  # 测试回合数
+        self.train_eps = 200 # 训练回合数
+        self.test_eps = 20  # 测试回合数
         self.max_steps = 200 # 每回合最大步数
+        self.eval_per_episode = 10 # 评估频率
+        self.eval_eps = 10 # 测试回合数
         self.gamma = 0.99 # 折扣因子
         self.lr = 0.0005 # 学习率
         self.epsilon_start = 0.95 # epsilon初始值
