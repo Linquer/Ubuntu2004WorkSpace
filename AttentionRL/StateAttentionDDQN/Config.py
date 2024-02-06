@@ -5,21 +5,22 @@ class Config:
     def __init__(self):
         self.algo_name = 'DoubleDQN' # 算法名称
         self.env_name = 'CartPole-v1' # 环境名称
-        self.seed = 1 # 随机种子
-        self.train_eps = 100 # 训练回合数
-        self.test_eps = 10  # 测试回合数
+        self.seed = 1234 # 随机种子
+        self.train_eps = 600 # 训练回合数
+        self.test_eps = 30  # 测试回合数
         self.max_steps = 200 # 每回合最大步数
         self.gamma = 0.99 # 折扣因子
-        self.lr = 0.001 # 学习率
+        self.lr = 0.0005 # 学习率
         self.epsilon_start = 0.95 # epsilon初始值
-        self.epsilon_end = 0.01 # epsilon最终值
+        self.epsilon_end = 0.05 # epsilon最终值
         self.epsilon_decay = 500 # epsilon衰减率
-        self.buffer_size = 10000 # ReplayBuffer容量
-        self.batch_size = 64 # ReplayBuffer中批次大小
+        self.buffer_size = 1000 # ReplayBuffer容量
+        self.batch_size = 128 # ReplayBuffer中批次大小
         self.target_update = 4 # 目标网络更新频率
         self.hidden_dim = 256 # 神经网络隐藏层维度
         self.atten_noise = False
         self.mid_save = False
+        self.update_freq = 2
         if torch.cuda.is_available(): # 是否使用GPUs
             self.device = 'cuda'
         else:

@@ -9,13 +9,15 @@ def train(cfg, env, agent):
         ep_reward = 0  # 记录一回合内的奖励
         ep_step = 0
         state = env.reset()  # 重置环境，返回初始状态
-        for _ in range(cfg.max_steps):
+        for i in range(cfg.max_steps):
             ep_step += 1
             action = agent.sample_action(state)  # 选择动作
             next_state, reward, done, _ = env.step(action)  # 更新环境，返回transition
             agent.memory.push((state, action, reward, next_state, done))  # 保存transition
             state = next_state  # 更新下一个状态
-            agent.update()  # 更新智能体
+            if i % cfg.update_freq == 0:
+                agent.update()
+            # agent.update()  # 更新智能体
             ep_reward += reward  # 累加奖励
             if done:
                 break
