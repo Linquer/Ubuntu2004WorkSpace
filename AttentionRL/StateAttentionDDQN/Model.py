@@ -17,7 +17,7 @@ class AttentionNetwork(nn.Module):
         atten_std = atten.std(dim=-1).detach().view(-1, 1, 1)
         atten_mean = atten.mean(dim=-1).detach().view(-1, 1, 1)
         mask = atten < atten_mean
-        atten = (atten + atten_std * 0.005) * mask + (atten) * ~mask
+        atten = (atten + atten_std * 0.05) * mask + (atten) * ~mask
         return atten
 
     def forward(self, x, Q): # Q: batch_size * 1 * dim_k
