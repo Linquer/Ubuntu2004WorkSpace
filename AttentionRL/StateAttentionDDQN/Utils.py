@@ -17,6 +17,7 @@ def train(cfg, env, agent):
     print("开始训练！")
     rewards = []  # 记录所有回合的奖励
     steps = []
+    total_count = 0
     best_ep_reward = -1000 # 记录最大回合奖励
     for i_ep in range(cfg.train_eps):
         ep_reward = 0  # 记录一回合内的奖励
@@ -32,6 +33,7 @@ def train(cfg, env, agent):
                 agent.update()
             # agent.update()  # 更新智能体
             ep_reward += reward  # 累加奖励
+            total_count += 1
             if done:
                 break
         if (i_ep+1)%cfg.eval_per_episode == 0:
@@ -65,6 +67,7 @@ def train(cfg, env, agent):
         steps.append(ep_step)
         rewards.append(ep_reward)
     print("完成训练！")
+    print(f"一共收集{total_count}次数据")
     env.close()
     return output_agent, {'rewards':rewards}
 
