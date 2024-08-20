@@ -1,0 +1,83 @@
+INFO 2024-05-24 16:12:48,203-config.py[line:59] ../common/c_gen_traffic/flow_6_p_1
+INFO 2024-05-24 16:12:48,381-config.py[line:126] the flow information :
+INFO 2024-05-24 16:12:48,381-test.py[line:39] pid : 33189
+INFO 2024-05-24 16:12:52,909-test.py[line:54]  ========================= test traffic id : 700 =========================
+INFO 2024-05-24 16:12:52,910-test.py[line:66] offset : [3, 1, 5, 4, 5, 2]
+INFO 2024-05-24 16:12:52,910-test.py[line:67] prd : [5, 4, 4, 5, 1, 1]
+INFO 2024-05-24 16:12:52,910-test.py[line:68] deadline : [1, 4, 3, 4, 1, 1]
+INFO 2024-05-24 16:12:52,910-test.py[line:69] arrival prob : [1.0, 0.9, 1.0, 0.6, 0.9, 0.8]
+INFO 2024-05-24 16:12:52,910-test.py[line:70] channel prob : [0.8, 1.0, 0.7, 1.0, 0.7, 0.6]
+INFO 2024-05-24 16:12:53,642-test.py[line:106] (time = 2000) timely throughput : 0.3283612174964725theory throughput : [0.32995722]mac delay(queue, total packet) : 1.87684mac delay(head, total packet) : 1.87684mac delay(queue, success packet) : 1.25046mac delay(head, success packet) : 1.25046
+INFO 2024-05-24 16:12:54,373-test.py[line:106] (time = 4000) timely throughput : 0.3287740118676456theory throughput : [0.32995722]mac delay(queue, total packet) : 1.877mac delay(head, total packet) : 1.877mac delay(queue, success packet) : 1.25879mac delay(head, success packet) : 1.25879
+INFO 2024-05-24 16:12:54,739-test.py[line:128] timely throughput : 0.3296332046332046theory throughput : [0.32995722]mac delay(queue, total packet) : 1.87685mac delay(head, total packet) : 1.87685mac delay(queue, success packet) : 1.25842mac delay(head, success packet) : 1.25842
+INFO 2024-05-24 16:12:54,739-test.py[line:54]  ========================= test traffic id : 701 =========================
+INFO 2024-05-24 16:12:54,740-test.py[line:66] offset : [2, 1, 4, 0, 1, 1]
+INFO 2024-05-24 16:12:54,740-test.py[line:67] prd : [3, 1, 2, 2, 5, 3]
+INFO 2024-05-24 16:12:54,740-test.py[line:68] deadline : [2, 1, 3, 1, 5, 4]
+INFO 2024-05-24 16:12:54,740-test.py[line:69] arrival prob : [1.0, 0.7, 0.9, 0.7, 0.9, 0.7]
+INFO 2024-05-24 16:12:54,740-test.py[line:70] channel prob : [0.8, 1.0, 0.8, 1.0, 1.0, 0.7]
+INFO 2024-05-24 16:12:55,480-test.py[line:106] (time = 2000) timely throughput : 0.440781995908161theory throughput : [0.43872433]mac delay(queue, total packet) : 2.59855mac delay(head, total packet) : 2.59855mac delay(queue, success packet) : 1.30067mac delay(head, success packet) : 1.30067
+INFO 2024-05-24 16:12:56,220-test.py[line:106] (time = 4000) timely throughput : 0.43895316185555433theory throughput : [0.43872433]mac delay(queue, total packet) : 2.60249mac delay(head, total packet) : 2.60249mac delay(queue, success packet) : 1.28582mac delay(head, success packet) : 1.28582
+INFO 2024-05-24 16:12:56,591-test.py[line:128] timely throughput : 0.43814894378804153theory throughput : [0.43872433]mac delay(queue, total packet) : 2.60607mac delay(head, total packet) : 2.60607mac delay(queue, success packet) : 1.27906mac delay(head, success packet) : 1.27906
+INFO 2024-05-24 16:12:56,591-test.py[line:54]  ========================= test traffic id : 702 =========================
+INFO 2024-05-24 16:12:56,591-test.py[line:66] offset : [2, 4, 4, 5, 5, 2]
+INFO 2024-05-24 16:12:56,591-test.py[line:67] prd : [5, 4, 5, 3, 2, 1]
+INFO 2024-05-24 16:12:56,591-test.py[line:68] deadline : [4, 5, 4, 2, 3, 1]
+INFO 2024-05-24 16:12:56,591-test.py[line:69] arrival prob : [0.9, 0.7, 0.6, 0.5, 1.0, 1.0]
+INFO 2024-05-24 16:12:56,591-test.py[line:70] channel prob : [0.7, 0.9, 0.6, 0.5, 0.8, 0.9]
+INFO 2024-05-24 16:12:57,332-test.py[line:106] (time = 2000) timely throughput : 0.42432950191570884theory throughput : [0.41893685]mac delay(queue, total packet) : 2.86398mac delay(head, total packet) : 2.86398mac delay(queue, success packet) : 1.63431mac delay(head, success packet) : 1.63431
+INFO 2024-05-24 16:12:58,076-test.py[line:106] (time = 4000) timely throughput : 0.4266777133388567theory throughput : [0.41893685]mac delay(queue, total packet) : 2.85797mac delay(head, total packet) : 2.85797mac delay(queue, success packet) : 1.60583mac delay(head, success packet) : 1.60583
+INFO 2024-05-24 16:12:58,449-test.py[line:128] timely throughput : 0.4260590015128593theory throughput : [0.41893685]mac delay(queue, total packet) : 2.85978mac delay(head, total packet) : 2.85978mac delay(queue, success packet) : 1.62494mac delay(head, success packet) : 1.62494
+INFO 2024-05-24 16:12:58,450-test.py[line:54]  ========================= test traffic id : 703 =========================
+INFO 2024-05-24 16:12:58,450-test.py[line:66] offset : [0, 0, 4, 1, 5, 2]
+INFO 2024-05-24 16:12:58,450-test.py[line:67] prd : [2, 4, 4, 1, 5, 5]
+INFO 2024-05-24 16:12:58,450-test.py[line:68] deadline : [1, 1, 5, 1, 4, 2]
+INFO 2024-05-24 16:12:58,450-test.py[line:69] arrival prob : [0.6, 0.7, 0.9, 0.9, 0.6, 0.9]
+INFO 2024-05-24 16:12:58,450-test.py[line:70] channel prob : [0.6, 0.9, 0.8, 0.6, 0.6, 0.7]
+INFO 2024-05-24 16:12:59,177-test.py[line:106] (time = 2000) timely throughput : 0.3864062081883864theory throughput : [0.38088968]mac delay(queue, total packet) : 1.99117mac delay(head, total packet) : 1.99117mac delay(queue, success packet) : 1.4349mac delay(head, success packet) : 1.4349
+INFO 2024-05-24 16:12:59,903-test.py[line:106] (time = 4000) timely throughput : 0.3843189368770764theory throughput : [0.38088968]mac delay(queue, total packet) : 1.99269mac delay(head, total packet) : 1.99269mac delay(queue, success packet) : 1.44398mac delay(head, success packet) : 1.44398
+INFO 2024-05-24 16:13:00,265-test.py[line:128] timely throughput : 0.3830058417419012theory throughput : [0.38088968]mac delay(queue, total packet) : 1.99448mac delay(head, total packet) : 1.99448mac delay(queue, success packet) : 1.4487mac delay(head, success packet) : 1.4487
+INFO 2024-05-24 16:13:00,265-test.py[line:54]  ========================= test traffic id : 704 =========================
+INFO 2024-05-24 16:13:00,266-test.py[line:66] offset : [0, 1, 1, 5, 1, 0]
+INFO 2024-05-24 16:13:00,266-test.py[line:67] prd : [4, 2, 5, 4, 4, 5]
+INFO 2024-05-24 16:13:00,266-test.py[line:68] deadline : [1, 3, 3, 5, 3, 3]
+INFO 2024-05-24 16:13:00,266-test.py[line:69] arrival prob : [0.5, 0.9, 0.6, 0.6, 0.6, 0.8]
+INFO 2024-05-24 16:13:00,266-test.py[line:70] channel prob : [0.7, 1.0, 1.0, 0.9, 1.0, 0.7]
+INFO 2024-05-24 16:13:00,984-test.py[line:106] (time = 2000) timely throughput : 0.7897977132805629theory throughput : [0.79658877]mac delay(queue, total packet) : 2.14468mac delay(head, total packet) : 2.14468mac delay(queue, success packet) : 1.83018mac delay(head, success packet) : 1.83018
+INFO 2024-05-24 16:13:01,705-test.py[line:106] (time = 4000) timely throughput : 0.7897714907508161theory throughput : [0.79658877]mac delay(queue, total packet) : 2.15452mac delay(head, total packet) : 2.15452mac delay(queue, success packet) : 1.85065mac delay(head, success packet) : 1.85065
+INFO 2024-05-24 16:13:02,068-test.py[line:128] timely throughput : 0.7902693310165074theory throughput : [0.79658877]mac delay(queue, total packet) : 2.16768mac delay(head, total packet) : 2.16768mac delay(queue, success packet) : 1.86961mac delay(head, success packet) : 1.86961
+INFO 2024-05-24 16:13:02,068-test.py[line:54]  ========================= test traffic id : 705 =========================
+INFO 2024-05-24 16:13:02,069-test.py[line:66] offset : [5, 3, 5, 4, 5, 3]
+INFO 2024-05-24 16:13:02,069-test.py[line:67] prd : [3, 2, 5, 1, 3, 4]
+INFO 2024-05-24 16:13:02,069-test.py[line:68] deadline : [3, 2, 2, 1, 1, 1]
+INFO 2024-05-24 16:13:02,069-test.py[line:69] arrival prob : [0.6, 0.9, 0.8, 1.0, 0.6, 1.0]
+INFO 2024-05-24 16:13:02,069-test.py[line:70] channel prob : [0.6, 0.6, 0.7, 0.7, 0.5, 0.5]
+INFO 2024-05-24 16:13:02,799-test.py[line:106] (time = 2000) timely throughput : 0.3132255861597997theory throughput : [0.30952908]mac delay(queue, total packet) : 2.13362mac delay(head, total packet) : 2.13362mac delay(queue, success packet) : 1.0mac delay(head, success packet) : 1.0
+INFO 2024-05-24 16:13:03,529-test.py[line:106] (time = 4000) timely throughput : 0.3093267725341087theory throughput : [0.30952908]mac delay(queue, total packet) : 2.13811mac delay(head, total packet) : 2.13811mac delay(queue, success packet) : 1.0mac delay(head, success packet) : 1.0
+INFO 2024-05-24 16:13:03,894-test.py[line:128] timely throughput : 0.3103202212113103theory throughput : [0.30952908]mac delay(queue, total packet) : 2.13621mac delay(head, total packet) : 2.13621mac delay(queue, success packet) : 1.0mac delay(head, success packet) : 1.0
+INFO 2024-05-24 16:13:03,894-test.py[line:54]  ========================= test traffic id : 706 =========================
+INFO 2024-05-24 16:13:03,894-test.py[line:66] offset : [0, 0, 3, 1, 3, 2]
+INFO 2024-05-24 16:13:03,894-test.py[line:67] prd : [4, 2, 1, 4, 5, 4]
+INFO 2024-05-24 16:13:03,894-test.py[line:68] deadline : [5, 3, 1, 1, 1, 4]
+INFO 2024-05-24 16:13:03,894-test.py[line:69] arrival prob : [1.0, 0.8, 0.8, 0.6, 0.7, 0.5]
+INFO 2024-05-24 16:13:03,895-test.py[line:70] channel prob : [0.5, 0.5, 0.5, 0.6, 0.5, 0.7]
+INFO 2024-05-24 16:13:04,625-test.py[line:106] (time = 2000) timely throughput : 0.2956381260096931theory throughput : [0.29573367]mac delay(queue, total packet) : 2.65374mac delay(head, total packet) : 2.65374mac delay(queue, success packet) : 1.50638mac delay(head, success packet) : 1.50638
+INFO 2024-05-24 16:13:05,360-test.py[line:106] (time = 4000) timely throughput : 0.2939275615995691theory throughput : [0.29573367]mac delay(queue, total packet) : 2.6673mac delay(head, total packet) : 2.6673mac delay(queue, success packet) : 1.52634mac delay(head, success packet) : 1.52634
+INFO 2024-05-24 16:13:05,728-test.py[line:128] timely throughput : 0.29560356874126625theory throughput : [0.29573367]mac delay(queue, total packet) : 2.67161mac delay(head, total packet) : 2.67161mac delay(queue, success packet) : 1.51273mac delay(head, success packet) : 1.51273
+INFO 2024-05-24 16:13:05,728-test.py[line:54]  ========================= test traffic id : 707 =========================
+INFO 2024-05-24 16:13:05,728-test.py[line:66] offset : [4, 3, 3, 4, 1, 3]
+INFO 2024-05-24 16:13:05,728-test.py[line:67] prd : [3, 1, 5, 4, 1, 1]
+INFO 2024-05-24 16:13:05,728-test.py[line:68] deadline : [3, 1, 3, 3, 1, 1]
+INFO 2024-05-24 16:13:05,728-test.py[line:69] arrival prob : [0.8, 0.9, 0.5, 0.8, 0.7, 0.6]
+INFO 2024-05-24 16:13:05,728-test.py[line:70] channel prob : [1.0, 0.7, 1.0, 0.7, 1.0, 0.8]
+INFO 2024-05-24 16:13:06,462-test.py[line:106] (time = 2000) timely throughput : 0.35221995169979564theory throughput : [0.35287784]mac delay(queue, total packet) : 1.97455mac delay(head, total packet) : 1.97455mac delay(queue, success packet) : 1.27479mac delay(head, success packet) : 1.27479
+INFO 2024-05-24 16:13:07,201-test.py[line:106] (time = 4000) timely throughput : 0.35116935116935116theory throughput : [0.35287784]mac delay(queue, total packet) : 1.98171mac delay(head, total packet) : 1.98171mac delay(queue, success packet) : 1.26639mac delay(head, success packet) : 1.26639
+INFO 2024-05-24 16:13:07,569-test.py[line:128] timely throughput : 0.35184107116867996theory throughput : [0.35287784]mac delay(queue, total packet) : 1.97875mac delay(head, total packet) : 1.97875mac delay(queue, success packet) : 1.26536mac delay(head, success packet) : 1.26536
+INFO 2024-05-24 16:13:07,570-test.py[line:54]  ========================= test traffic id : 708 =========================
+INFO 2024-05-24 16:13:07,570-test.py[line:66] offset : [1, 2, 4, 3, 1, 1]
+INFO 2024-05-24 16:13:07,570-test.py[line:67] prd : [3, 3, 5, 2, 4, 4]
+INFO 2024-05-24 16:13:07,570-test.py[line:68] deadline : [1, 2, 2, 2, 4, 5]
+INFO 2024-05-24 16:13:07,570-test.py[line:69] arrival prob : [0.9, 0.8, 0.5, 0.9, 0.5, 0.5]
+INFO 2024-05-24 16:13:07,570-test.py[line:70] channel prob : [0.9, 1.0, 0.8, 0.8, 1.0, 0.9]
+INFO 2024-05-24 16:13:08,288-test.py[line:106] (time = 2000) timely throughput : 0.6556693211983314theory throughput : [0.66474386]mac delay(queue, total packet) : 1.9397mac delay(head, total packet) : 1.9397mac delay(queue, success packet) : 1.38635mac delay(head, success packet) : 1.38635
+INFO 2024-05-24 16:13:09,009-test.py[line:106] (time = 4000) timely throughput : 0.6507407407407407theory throughput : [0.66474386]mac delay(queue, total packet) : 1.95278mac delay(head, total packet) : 1.95278mac delay(queue, success packet) : 1.40381mac delay(head, success packet) : 1.40381

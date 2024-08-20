@@ -1,0 +1,3 @@
+source activate gympytorch
+tensorboard --logdir=\
+/Users/huangjianhui/Documents/PythonProject/packet_schedule_v2/dtde_dqn/model/decentralized_dtde_node3_flow6_traffic_2_global_state_try_only_expire_punish_hidden_40/node_3/flow_6/traffic_2/tensorboard

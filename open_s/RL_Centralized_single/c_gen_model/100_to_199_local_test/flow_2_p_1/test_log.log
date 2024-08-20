@@ -1,0 +1,10 @@
+INFO 2024-05-21 18:40:21,241-test.py[line:59] pid : 13699
+INFO 2024-05-21 18:40:21,241-test.py[line:64] traffic id : 100
+INFO 2024-05-21 18:40:21,242-config.py[line:28] theory : [0.83137977] , path : ../common/c_gen_theory_throughput/flow_2_p_1/traffic_100.npy
+INFO 2024-05-21 18:40:21,242-config.py[line:86] the flow information :
+INFO 2024-05-21 18:40:21,242-config.py[line:87] the offset : [array([1, 4])]
+INFO 2024-05-21 18:40:21,242-config.py[line:88] the period : [array([3, 3])]
+INFO 2024-05-21 18:40:21,242-config.py[line:89] the deadline : [array([1, 2])]
+INFO 2024-05-21 18:40:21,243-config.py[line:90] the arrival prob : [array([1. , 0.5])]
+INFO 2024-05-21 18:40:21,243-config.py[line:91] the channel prob : [array([1. , 0.5])]
+INFO 2024-05-21 18:40:21,243-config.py[line:92] the theory throughput : [0.83137977]
